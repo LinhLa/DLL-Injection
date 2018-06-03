@@ -5,7 +5,6 @@
 #include "stdafx.h"
 #include "MyApp.h"
 #include "MyAppDlg.h"
-
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -99,4 +98,3 @@ BOOL CMyAppApp::InitInstance()
 	//  application, rather than start the application's message pump.
 	return FALSE;
 }
-
