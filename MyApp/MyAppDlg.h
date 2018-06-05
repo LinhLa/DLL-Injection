@@ -2,7 +2,7 @@
 //
 
 #pragma once
-
+#include "Util.h"
 // CMyAppDlg dialog
 class CMyAppDlg : public CDialogEx
 {
@@ -29,9 +29,10 @@ protected:
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
 public:
-	afx_msg void OnBnClickedButton1();
-	afx_msg void OnBnClickedButton2();
-	afx_msg void OnBnClickedButton3();
-	afx_msg void OnBnClickedButton4();
-	afx_msg void OnBnClickedOk2();
+	afx_msg void OnGen128Object();
+	afx_msg void OnGen256Object();
+	afx_msg void OnGen512Object();
+	afx_msg void OnGen1024Object();
+private:
+	void UpdateStatic(CStringPtr myCstringArray[]);
 };

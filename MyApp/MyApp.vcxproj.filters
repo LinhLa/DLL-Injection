@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Tab dialog">
+      <UniqueIdentifier>{c3c5e359-df9a-4a27-98ef-e10f5c4d4cc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tab dialog">
+      <UniqueIdentifier>{88a6fe16-f0c9-4394-9b12-cb9073676521}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -36,31 +42,37 @@
     <ClInclude Include="Util.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DialogMainTab.h">
+    <ClInclude Include="MainWnd.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogMainTab.h">
+      <Filter>Header Files\Tab dialog</Filter>
     </ClInclude>
     <ClInclude Include="DialogTab1.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Tab dialog</Filter>
     </ClInclude>
     <ClInclude Include="DialogTab2.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Tab dialog</Filter>
     </ClInclude>
     <ClInclude Include="DialogTab3.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Tab dialog</Filter>
     </ClInclude>
     <ClInclude Include="DialogTab4.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Tab dialog</Filter>
     </ClInclude>
     <ClInclude Include="DialogTab5.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Tab dialog</Filter>
     </ClInclude>
     <ClInclude Include="DialogTab6.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Tab dialog</Filter>
     </ClInclude>
     <ClInclude Include="DialogTab7.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Tab dialog</Filter>
     </ClInclude>
     <ClInclude Include="DialogTab8.h">
+      <Filter>Header Files\Tab dialog</Filter>
+    </ClInclude>
+    <ClInclude Include="RegrexCheckDlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -74,31 +86,37 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DialogMainTab.cpp">
+    <ClCompile Include="MainWnd.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogMainTab.cpp">
+      <Filter>Source Files\Tab dialog</Filter>
     </ClCompile>
     <ClCompile Include="DialogTab1.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Tab dialog</Filter>
     </ClCompile>
     <ClCompile Include="DialogTab2.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Tab dialog</Filter>
     </ClCompile>
     <ClCompile Include="DialogTab3.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Tab dialog</Filter>
     </ClCompile>
     <ClCompile Include="DialogTab4.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Tab dialog</Filter>
     </ClCompile>
     <ClCompile Include="DialogTab5.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Tab dialog</Filter>
     </ClCompile>
     <ClCompile Include="DialogTab6.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Tab dialog</Filter>
     </ClCompile>
     <ClCompile Include="DialogTab7.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Tab dialog</Filter>
     </ClCompile>
     <ClCompile Include="DialogTab8.cpp">
+      <Filter>Source Files\Tab dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="RegrexCheckDlg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

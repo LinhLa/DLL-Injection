@@ -5,7 +5,6 @@
 #include "stdafx.h"
 #include "MyApp.h"
 #include "MyAppDlg.h"
-#include "DialogMainTab.h"
 #include "Util.h"
 #include "afxdialogex.h"
 
@@ -20,6 +19,7 @@ CMyAppDlg::CMyAppDlg(CWnd* pParent /*=NULL*/)
 	: CDialogEx(IDD_MYAPP_DIALOG, pParent)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
+	MyAppFactory::GetInstance()->Add(IDD_MYAPP_DIALOG, this);
 }
 
 void CMyAppDlg::DoDataExchange(CDataExchange* pDX)
@@ -30,11 +30,10 @@ void CMyAppDlg::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(CMyAppDlg, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
-	ON_BN_CLICKED(IDC_BUTTON1, &CMyAppDlg::OnBnClickedButton1)
-	ON_BN_CLICKED(IDC_BUTTON2, &CMyAppDlg::OnBnClickedButton2)
-	ON_BN_CLICKED(IDC_BUTTON3, &CMyAppDlg::OnBnClickedButton3)
-	ON_BN_CLICKED(IDC_BUTTON4, &CMyAppDlg::OnBnClickedButton4)
-	ON_BN_CLICKED(IDOK2, &CMyAppDlg::OnBnClickedOk2)
+	ON_BN_CLICKED(IDC_BUTTON1, &CMyAppDlg::OnGen128Object)
+	ON_BN_CLICKED(IDC_BUTTON2, &CMyAppDlg::OnGen256Object)
+	ON_BN_CLICKED(IDC_BUTTON3, &CMyAppDlg::OnGen512Object)
+	ON_BN_CLICKED(IDC_BUTTON4, &CMyAppDlg::OnGen1024Object)
 END_MESSAGE_MAP()
 
 
@@ -43,23 +42,13 @@ END_MESSAGE_MAP()
 BOOL CMyAppDlg::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
-
-	// Set the icon for this dialog.  The framework does this automatically
-	//  when the application's main window is not a dialog
 	SetIcon(m_hIcon, TRUE);			// Set big icon
 	SetIcon(m_hIcon, FALSE);		// Set small icon
 
+	CStringPtr Mystr(_T("Mystr"));
 
-	//CStringPtr myCstrPtr(_T("CLick to Gen 128 Object"));
-	CStringPtr myCstrPtr1;
-	*myCstrPtr1 = _T("CLick to Gen 128 Object");
-	//*myCstrPtr1 = *myCstrPtr;
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
-
-// If you add a minimize button to your dialog, you will need the code below
-//  to draw the icon.  For MFC applications using the document/view model,
-//  this is automatically done for you by the framework.
 
 void CMyAppDlg::OnPaint()
 {
@@ -95,53 +84,37 @@ HCURSOR CMyAppDlg::OnQueryDragIcon()
 
 
 
-void CMyAppDlg::OnBnClickedButton1()
+void CMyAppDlg::OnGen128Object()
 {
-	// TODO: Add your control notification handler code here
 	CStringPtr myCstringArray[128];
-	myCstringArray[0]->Format(_T("%d"), POOL_CSTRING()->size());
-	myCstringArray[1]->Format(_T("%d"), POOL_CSTRING()->capacity());
-	GetDlgItem(IDC_EDIT1)->SetWindowText(*myCstringArray[0]);
-	GetDlgItem(IDC_EDIT2)->SetWindowText(*myCstringArray[1]);
+	UpdateStatic(myCstringArray);
 }
 
 
-void CMyAppDlg::OnBnClickedButton2()
+void CMyAppDlg::OnGen256Object()
 {
-	// TODO: Add your control notification handler code here
 	CStringPtr myCstringArray[256];
-	myCstringArray[0]->Format(_T("%d"), POOL_CSTRING()->size());
-	myCstringArray[1]->Format(_T("%d"), POOL_CSTRING()->capacity());
-	GetDlgItem(IDC_EDIT1)->SetWindowText(*myCstringArray[0]);
-	GetDlgItem(IDC_EDIT2)->SetWindowText(*myCstringArray[1]);
+	UpdateStatic(myCstringArray);
 }
 
 
-void CMyAppDlg::OnBnClickedButton3()
+void CMyAppDlg::OnGen512Object()
 {
-	// TODO: Add your control notification handler code here
 	CStringPtr myCstringArray[512];
-	myCstringArray[0]->Format(_T("%d"), POOL_CSTRING()->size());
-	myCstringArray[1]->Format(_T("%d"), POOL_CSTRING()->capacity());
-	GetDlgItem(IDC_EDIT1)->SetWindowText(*myCstringArray[0]);
-	GetDlgItem(IDC_EDIT2)->SetWindowText(*myCstringArray[1]);
+	UpdateStatic(myCstringArray);
 }
 
 
-void CMyAppDlg::OnBnClickedButton4()
+void CMyAppDlg::OnGen1024Object()
 {
-	// TODO: Add your control notification handler code here
 	CStringPtr myCstringArray[1024];
+	UpdateStatic(myCstringArray);
+}
+
+void CMyAppDlg::UpdateStatic(CStringPtr myCstringArray[])
+{
 	myCstringArray[0]->Format(_T("%d"), POOL_CSTRING()->size());
 	myCstringArray[1]->Format(_T("%d"), POOL_CSTRING()->capacity());
 	GetDlgItem(IDC_EDIT1)->SetWindowText(*myCstringArray[0]);
 	GetDlgItem(IDC_EDIT2)->SetWindowText(*myCstringArray[1]);
-}
-
-
-void CMyAppDlg::OnBnClickedOk2()
-{
-	// TODO: Add your control notification handler code here
-	CDialogMainTab DialogMainTab(this);
-	DialogMainTab.DoModal();
 }

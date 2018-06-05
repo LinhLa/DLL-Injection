@@ -25,6 +25,8 @@ IMPLEMENT_DYNAMIC(CDialogMainTab, CDialogEx)
 CDialogMainTab::CDialogMainTab(CWnd* pParent /*=NULL*/)
 	: CDialogEx(IDD_DIALOG_TAB_MAIN, pParent), m_DialogTab(8)
 {
+	MyAppFactory::GetInstance()->Add(IDD_DIALOG_TAB_MAIN, this);
+
 	m_DialogTab[SET1] = new CDialogTab1;
 	m_DialogTab[SET2] = new CDialogTab2;
 	m_DialogTab[SET3] = new CDialogTab3;

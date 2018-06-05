@@ -198,8 +198,10 @@
     <ClInclude Include="DialogTab6.h" />
     <ClInclude Include="DialogTab7.h" />
     <ClInclude Include="DialogTab8.h" />
+    <ClInclude Include="MainWnd.h" />
     <ClInclude Include="MyApp.h" />
     <ClInclude Include="MyAppDlg.h" />
+    <ClInclude Include="RegrexCheckDlg.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -215,8 +217,10 @@
     <ClCompile Include="DialogTab6.cpp" />
     <ClCompile Include="DialogTab7.cpp" />
     <ClCompile Include="DialogTab8.cpp" />
+    <ClCompile Include="MainWnd.cpp" />
     <ClCompile Include="MyApp.cpp" />
     <ClCompile Include="MyAppDlg.cpp" />
+    <ClCompile Include="RegrexCheckDlg.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

@@ -5,7 +5,7 @@
 #include "MyApp.h"
 #include "DialogTab6.h"
 #include "afxdialogex.h"
-
+#include "Util.h"
 
 // CDialogTab6 dialog
 
@@ -14,7 +14,7 @@ IMPLEMENT_DYNAMIC(CDialogTab6, CDialogEx)
 CDialogTab6::CDialogTab6(CWnd* pParent /*=NULL*/)
 	: CDialogEx(IDD_DIALOG_TAB6, pParent)
 {
-
+	MyAppFactory::GetInstance()->Add(IDD_DIALOG_TAB6, this);
 }
 
 CDialogTab6::~CDialogTab6()
