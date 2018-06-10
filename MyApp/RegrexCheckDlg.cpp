@@ -11,7 +11,6 @@
 // CRegrexCheckDlg dialog
 
 #define REGREX_PATTERN	_T("[a-z0-9]{1,18}")
-#define REGREX_POLICY (std::regex_constants::ECMAScript | std::regex_constants::icase)
 IMPLEMENT_DYNAMIC(CRegrexCheckDlg, CDialogEx)
 
 CRegrexCheckDlg::CRegrexCheckDlg(CWnd* pParent /*=NULL*/)
@@ -44,7 +43,7 @@ void CRegrexCheckDlg::OnBnClickedButton1()
 	CString regrex;
 	GetDlgItemText(IDC_EDIT1, target);
 	GetDlgItemText(IDC_EDIT2, regrex);
-	if (Util::IsMatchRegrex<REGREX_POLICY>(target.GetBuffer(), regrex.GetBuffer()))
+	if (Util::IsMatchRegrex<REGEX_POLICY::ECMA_ICASE>(target.GetBuffer(), regrex.GetBuffer()))
 		AfxMessageBox(_T("Match"), MB_OK, 0);
 	else
 		AfxMessageBox(_T("Not Match"), MB_OK, 0);

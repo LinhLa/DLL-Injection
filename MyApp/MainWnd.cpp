@@ -1,13 +1,13 @@
 // MainWnd.cpp : implementation file
-//
-
+#pragma once
 #include "stdafx.h"
+#include "Util.h"
 #include "MyApp.h"
 #include "MainWnd.h"
 #include "DialogMainTab.h"
 #include "MyAppDlg.h"
 #include "RegrexCheckDlg.h"
-#include "Util.h"
+#include "TestCbxWithRegex.h"
 #include "afxdialogex.h"
 
 
@@ -36,6 +36,7 @@ BEGIN_MESSAGE_MAP(CMainWnd, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON2, &CMainWnd::OnBnClickedButton2)
 	ON_BN_CLICKED(IDC_BUTTON6, &CMainWnd::OnBnClickedButton6)
 	ON_BN_CLICKED(IDC_BUTTON3, &CMainWnd::OnBnClickedButton3)
+	ON_BN_CLICKED(IDC_BUTTON4, &CMainWnd::OnBnClickedButton4)
 END_MESSAGE_MAP()
 
 
@@ -70,4 +71,12 @@ void CMainWnd::OnBnClickedButton3()
 	// TODO: Add your control notification handler code here
 	CRegrexCheckDlg RegrexCheckDlg(this);
 	RegrexCheckDlg.DoModal();
+}
+
+
+void CMainWnd::OnBnClickedButton4()
+{
+	// TODO: Add your control notification handler code here
+	CTestCbxWithRegex TestCbxWithRegex(this);
+	TestCbxWithRegex.DoModal();
 }

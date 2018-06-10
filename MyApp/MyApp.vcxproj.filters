@@ -75,6 +75,18 @@
     <ClInclude Include="RegrexCheckDlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="WindowFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectPool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TestCbxWithRegex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HandleComboboxItem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MyApp.cpp">
@@ -117,6 +129,12 @@
       <Filter>Source Files\Tab dialog</Filter>
     </ClCompile>
     <ClCompile Include="RegrexCheckDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestCbxWithRegex.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HandleComboboxItem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

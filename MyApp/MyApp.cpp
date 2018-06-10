@@ -59,8 +59,8 @@ BOOL CMyAppApp::InitInstance()
 
 	CMainWnd dlg;
 	m_pMainWnd = &dlg;
-	INT_PTR nResponse = dlg.DoModal();	
-	
+	INT_PTR nResponse = dlg.DoModal();
+
 	if (nResponse == IDOK)
 	{
 		// TODO: Place code here to handle when the dialog is
@@ -87,3 +87,5 @@ BOOL CMyAppApp::InitInstance()
 	//  application, rather than start the application's message pump.
 	return FALSE;
 }
+
+
