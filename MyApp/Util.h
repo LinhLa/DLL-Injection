@@ -37,7 +37,7 @@ namespace Util
 	}
 
 
-	template<REGEX_POLICY N = ECMA_ICASE> bool IsMatchRegrex(const TCHAR* target, const TCHAR* regrex)
+	template<REGEX_POLICY N = ECMA_ICASE> bool IsMatchRegex(const TCHAR* target, const TCHAR* regrex)
 	{
 		const std::regex_constants::syntax_option_type PolicyRegrex[] =
 		{
@@ -49,7 +49,7 @@ namespace Util
 		return std::regex_match(target, self_regex);
 	}
 
-	template<REGEX_POLICY N = ECMA_ICASE> const TCHAR* RegrexReplace(const TCHAR* target, const TCHAR* regrex)
+	template<REGEX_POLICY N = ECMA_ICASE> const TCHAR* RegexReplace(const TCHAR* target, const TCHAR* regrex)
 	{
 		static _string s;
 		s.clear();

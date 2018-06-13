@@ -20,6 +20,13 @@ protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 
 	DECLARE_MESSAGE_MAP()
+	enum REGEX_BUTTON_STATUS {
+		REGEX_MATCH,
+		REGEX_REPLACE
+	};
+
+	REGEX_BUTTON_STATUS m_regex_status = REGEX_MATCH;
 public:
 	afx_msg void OnBnClickedButton1();
+	virtual BOOL PreTranslateMessage(MSG* pMsg);
 };

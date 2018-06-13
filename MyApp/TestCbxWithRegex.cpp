@@ -7,16 +7,15 @@
 #include "Util.h"
 #include "afxdialogex.h"
 
-#define	CELSIUS _T("%d\u2103")
-#define	PERCENT	_T("%d%%")
-#define	MESURE _T("%d cmm")
+#define	CELSIUS_FORMAT	 _T("%d\u2103")
+#define	PERCENT_FORMAT		_T("%d%%")
+#define	MESURE_FORMAT	 _T("%d cmm")
 
 #define	CELSIUS_REGEX	_T("[0-9]{1,2}\u2103")
 #define	PERCENT_REGEX	_T("[0-9]{1,2}%")
 #define	MESURE_REGEX	_T("[0-9]{1,2} cmm")
 
-#define	INTEGER_EXTRACT_REGEX	_T("[^0-9]")
-#define	FLOAT_EXTRACT_REGEX		_T("^\\d|^,")
+#define	NOT_NUMBER_REGEX	_T("[^0-9]")
 
 #define MAX 90
 #define MIN 0
@@ -31,11 +30,11 @@ CTestCbxWithRegex::CTestCbxWithRegex(CWnd* pParent /*=NULL*/)
 	m_data[0] = 2;
 	m_data[1] = 20;
 	m_data[2] = 30;
-	m_MapComboItem =
+	m_MapComboItem = std::map<int, Util::CItem >
 	{
-		{ IDC_COMBO1,{ &m_data[0], INDEX, CELSIUS,CELSIUS_REGEX, INTEGER_EXTRACT_REGEX, MIN, MAX, 5} },
-		{ IDC_COMBO2,{ &m_data[1],VALUE, PERCENT, PERCENT_REGEX, INTEGER_EXTRACT_REGEX, MIN, MAX, 5 } },
-		{ IDC_COMBO3,{ &m_data[2],VALUE, MESURE, MESURE_REGEX, INTEGER_EXTRACT_REGEX, MIN, MAX, 5 } }
+		{ IDC_COMBO1,{ &m_data[0], CITEM_TYPE::INDEX, CELSIUS_FORMAT,CELSIUS_REGEX, NOT_NUMBER_REGEX, MIN, MAX, 5} },
+		{ IDC_COMBO2,{ &m_data[1],CITEM_TYPE::VALUE, PERCENT_FORMAT, PERCENT_REGEX, NOT_NUMBER_REGEX, MIN, MAX, 5 } },
+		{ IDC_COMBO3,{ &m_data[2],CITEM_TYPE::VALUE, MESURE_FORMAT, MESURE_REGEX, NOT_NUMBER_REGEX, MIN, MAX, 5 } }
 	};
 }
 
@@ -82,6 +81,7 @@ BOOL CTestCbxWithRegex::OnInitDialog()
 
 void CTestCbxWithRegex::OnCbnSelchange()
 {
+	/*Update value*/
 	std::function<void()> OnUpdateNotify = [&]() {AfxMessageBox(_T("Not Match Regex when update value"), 0, 0); };
 	Util::UpdateCombobox(this, LOWORD(GetCurrentMessage()->wParam), m_MapComboItem, OnUpdateNotify);
 	Reload();

@@ -1,17 +1,18 @@
 #pragma once
 #include <map>
 #include <functional>
-enum ITEM_COMBO : unsigned int {
+enum CITEM_TYPE : unsigned int {
 	INDEX = 0,
-	VALUE
+	INTEGER,
+	FLOAT_POINT
 };
 namespace Util {
 	struct CItem {
-		int* m_data;
-		ITEM_COMBO m_type;
+		void* m_data;
+		CITEM_TYPE m_type;
 		CString m_format;
-		CString m_regex;
-		CString m_extract_regex;
+		CString m_regex_match;
+		CString m_regex_replace;
 		int m_Min;
 		int m_Max;
 		int m_Step;
