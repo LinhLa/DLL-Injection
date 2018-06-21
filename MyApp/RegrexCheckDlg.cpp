@@ -50,7 +50,7 @@ void CRegrexCheckDlg::OnBnClickedButton1()
 			AfxMessageBox(_T("Not Match"), MB_OK, 0);
 		break;
 	case REGEX_BUTTON_STATUS::REGEX_REPLACE:
-		Util::RegexReplace<REGEX_POLICY::ECMA_ICASE>(target.GetBuffer(), regrex.GetBuffer());
+		GetDlgItem(IDC_EDIT1)->SetWindowText(Util::RegexReplace<REGEX_POLICY::ECMA>(target.GetBuffer(), regrex.GetBuffer()));
 		break;
 	default:
 		break;
@@ -62,12 +62,12 @@ BOOL CRegrexCheckDlg::PreTranslateMessage(MSG* pMsg)
 {
 	if (pMsg->message == WM_KEYDOWN && pMsg->wParam == VK_CONTROL)
 	{
-		GetDlgItem(IDC_BUTTON1)->SetWindowTextW(REGEX_REPLACE_STR);
+		GetDlgItem(IDC_BUTTON1)->SetWindowText(REGEX_REPLACE_STR);
 		m_regex_status = REGEX_BUTTON_STATUS::REGEX_REPLACE;
 	}
 	else if(pMsg->message == WM_KEYUP && pMsg->wParam == VK_CONTROL)
 	{
-		GetDlgItem(IDC_BUTTON1)->SetWindowTextW(REGEX_MATCH_STR);
+		GetDlgItem(IDC_BUTTON1)->SetWindowText(REGEX_MATCH_STR);
 		m_regex_status = REGEX_BUTTON_STATUS::REGEX_MATCH;
 	}
 	return CDialogEx::PreTranslateMessage(pMsg);

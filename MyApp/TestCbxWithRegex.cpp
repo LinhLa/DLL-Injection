@@ -7,15 +7,19 @@
 #include "Util.h"
 #include "afxdialogex.h"
 
-#define	CELSIUS_FORMAT	 _T("%d\u2103")
-#define	PERCENT_FORMAT		_T("%d%%")
-#define	MESURE_FORMAT	 _T("%d cmm")
+#define DEFAULT_FORMAT	 _T("%d")
+#define	DEGREE_FORMAT	_T("%d\u02DA")
+#define	PERCENT_FORMAT	_T("%d%%")
+#define	MESURE_FORMAT	_T("%d cmm")
+#define SECOND_FORMAT	_T("%.1fs")
 
-#define	CELSIUS_REGEX	_T("[0-9]{1,2}\u2103")
+#define	DEGREE_REGEX	_T("[0-9]{1,2}\u02DA")
 #define	PERCENT_REGEX	_T("[0-9]{1,2}%")
 #define	MESURE_REGEX	_T("[0-9]{1,2} cmm")
 
-#define	NOT_NUMBER_REGEX	_T("[^0-9]")
+#define DEFAULT_REPLACE _T("")
+#define	NOT_NUM_REPLACE	_T("[^-0-9]")
+#define NOT_FLOAT_NUM_REPLACE _T("[^-0-9.]")
 
 #define MAX 90
 #define MIN 0
@@ -32,9 +36,9 @@ CTestCbxWithRegex::CTestCbxWithRegex(CWnd* pParent /*=NULL*/)
 	m_data[2] = 30;
 	m_MapComboItem = std::map<int, Util::CItem >
 	{
-		{ IDC_COMBO1,{ &m_data[0], CITEM_TYPE::INDEX, CELSIUS_FORMAT,CELSIUS_REGEX, NOT_NUMBER_REGEX, MIN, MAX, 5} },
-		{ IDC_COMBO2,{ &m_data[1],CITEM_TYPE::VALUE, PERCENT_FORMAT, PERCENT_REGEX, NOT_NUMBER_REGEX, MIN, MAX, 5 } },
-		{ IDC_COMBO3,{ &m_data[2],CITEM_TYPE::VALUE, MESURE_FORMAT, MESURE_REGEX, NOT_NUMBER_REGEX, MIN, MAX, 5 } }
+		{ IDC_COMBO1, { &m_data[0], CITEM_TYPE::INDEX, DEGREE_FORMAT, DEGREE_REGEX, NOT_NUM_REPLACE, MIN, MAX, 5 } },
+		{ IDC_COMBO2, { &m_data[1], CITEM_TYPE::INTEGER, PERCENT_FORMAT, PERCENT_REGEX, NOT_NUM_REPLACE, MIN, MAX, 5 } },
+		{ IDC_COMBO3, { &m_data[2], CITEM_TYPE::INTEGER, MESURE_FORMAT, MESURE_REGEX, NOT_NUM_REPLACE, MIN, MAX, 5 } }
 	};
 }
 
@@ -90,12 +94,10 @@ void CTestCbxWithRegex::OnCbnSelchange()
 void CTestCbxWithRegex::Reload()
 {
 	CString text;
-	text.Format(_T("%d"), m_data[0]);
-	GetDlgItem(IDC_ITEM_1)->SetWindowTextW(text);
-
-	text.Format(_T("%d"), m_data[1]);
-	GetDlgItem(IDC_ITEM_2)->SetWindowTextW(text);
-
-	text.Format(_T("%d"), m_data[2]);
-	GetDlgItem(IDC_ITEM_3)->SetWindowTextW(text);
+	USHORT uIndex = 0;
+	for (auto &idc : { IDC_ITEM_1 , IDC_ITEM_2, IDC_ITEM_3 })
+	{
+		text.Format(_T("%d"), m_data[uIndex++]);
+		GetDlgItem(idc)->SetWindowText(text);
+	}
 }

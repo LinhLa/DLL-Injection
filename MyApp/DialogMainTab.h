@@ -1,9 +1,9 @@
 #pragma once
-#include <vector>
-#include <map>
+#include "Util.h"
+#include "afxcmn.h"
 // CDialogMainTab dialog
 
-class CDialogMainTab : public CDialogEx
+class CDialogMainTab : public CDialogEx, public Util::SwitchGroupTabHandler<CDialogMainTab>
 {
 	DECLARE_DYNAMIC(CDialogMainTab)
 
@@ -22,34 +22,24 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg void OnBnClickedButton1();
-
-private:
-	DWORD m_ModeActive;
-	enum TAB_CONTROL_ITEM {
-		SET1,
-		SET2,
-		SET3,
-		SET4,
-		SET5,
-		SET6,
-		SET7,
-		SET8
-	};
-	struct TabItemInfo
-	{
-		TAB_CONTROL_ITEM SettingGroup;
-		DWORD dwIDC;
-		CString lpszTitle;
-	};
-	void InitDialogTab();
-	void HideDialogTab();
-	void ShowTab(DWORD Mode);
-	DWORD TranslateDialogIndex(DWORD tabID);
-	std::vector<CWnd*> m_DialogTab;
-	std::map<DWORD, std::vector<TabItemInfo>> m_MapModeToControl;
-public:
 	virtual BOOL OnInitDialog();
 	afx_msg void OnBnClickedButton2();
 	afx_msg void OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnTcnSelchangingTab1(NMHDR *pNMHDR, LRESULT *pResult);
+private:
+	CTabCtrl m_CTabCtrl;
+	enum TAB_CONTROL_ITEM {
+		FLOW1,
+		FLOW2,
+		FLOW3,
+		FLOW4,
+		CHE1,
+		CHE2,
+		CHE3,
+		CHE4
+	};
+	enum MODE_ACTIVE {
+		FLOW,
+		CHE
+	};
 };

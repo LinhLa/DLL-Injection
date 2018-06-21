@@ -8,7 +8,9 @@ namespace Util {
 
 	void SetIndexItemCombobox(CWnd* dlg, std::pair<const int, Util::CItem > &ComboItem, std::function<void()> &notifyError)
 	{
-		((CComboBox*)dlg->GetDlgItem(ComboItem.first))->SetCurSel(*(int*)ComboItem.second.m_data);
+		int iResult = ((CComboBox*)dlg->GetDlgItem(ComboItem.first))->SetCurSel(*(int*)ComboItem.second.m_data);
+		if (iResult == CB_ERR)
+			notifyError();
 	}
 
 	void SetValueItemCombobox(CWnd* dlg, std::pair<const int, Util::CItem > &ComboItem, std::function<void()> &notifyError)

@@ -50,3 +50,13 @@
 #pragma comment(linker,"/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
 #endif
 #endif
+
+#include <DbgHelp.h>
+
+#include <regex>
+#include <string>
+#include <functional>
+#include <algorithm>
+#include <map>
+#include <thread>
+#include <list>

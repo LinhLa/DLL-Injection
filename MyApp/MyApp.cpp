@@ -55,8 +55,6 @@ BOOL CMyAppApp::InitInstance()
 
 	SetRegistryKey(_T("Local AppWizard-Generated Applications"));
 
-	MyAppFactory::GetInstance()->Run();
-
 	CMainWnd dlg;
 	m_pMainWnd = &dlg;
 	INT_PTR nResponse = dlg.DoModal();

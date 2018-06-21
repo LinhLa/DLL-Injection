@@ -8,6 +8,7 @@
 #include "MyAppDlg.h"
 #include "RegrexCheckDlg.h"
 #include "TestCbxWithRegex.h"
+#include "HookingDlg.h"
 #include "afxdialogex.h"
 
 
@@ -37,6 +38,8 @@ BEGIN_MESSAGE_MAP(CMainWnd, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON6, &CMainWnd::OnBnClickedButton6)
 	ON_BN_CLICKED(IDC_BUTTON3, &CMainWnd::OnBnClickedButton3)
 	ON_BN_CLICKED(IDC_BUTTON4, &CMainWnd::OnBnClickedButton4)
+	ON_WM_COPYDATA()
+	ON_BN_CLICKED(IDC_BUTTON5, &CMainWnd::OnBnClickedButton5)
 END_MESSAGE_MAP()
 
 
@@ -79,4 +82,16 @@ void CMainWnd::OnBnClickedButton4()
 	// TODO: Add your control notification handler code here
 	CTestCbxWithRegex TestCbxWithRegex(this);
 	TestCbxWithRegex.DoModal();
+}
+
+BOOL CMainWnd::OnCopyData(CWnd* pWnd, COPYDATASTRUCT* pCopyDataStruct)
+{
+	AfxMessageBox((TCHAR*)pCopyDataStruct->lpData, 0, 0);
+	return TRUE;
+}
+
+void CMainWnd::OnBnClickedButton5()
+{
+	CHookingDlg hookingDlg;
+	hookingDlg.DoModal();
 }
