@@ -1,5 +1,5 @@
 #pragma once
-
+#include "Util.h"
 class CHookingDlg : public CDialogEx
 {
 	DECLARE_DYNAMIC(CHookingDlg)
@@ -21,11 +21,14 @@ private:
 		HOOK,
 		CALL
 	} m_hooking_status;
+	std::map<CString, THUNK_DATA_ENTRY> m_MapImportFunction;
+	void SetComboFunction();
 public:
-	afx_msg void OnBnClickedParse();
 	virtual BOOL PreTranslateMessage(MSG* pMsg);
 	virtual BOOL OnInitDialog();
 	afx_msg void OnBnClickedButton1();
+	afx_msg void OnBnClickedCancle();
+	afx_msg void OnCbnSelchangeCombo1();
 };
 
 void FunctionHooked();

@@ -4,10 +4,12 @@
 #include <thread>
 #ifdef _USRDLL
 #define WINFACTORY_API __declspec(dllexport)
+#define WINFACTORY_EXTERN
 #else
 #define WINFACTORY_API __declspec(dllimport)
+#define WINFACTORY_EXTERN extern
 #endif
-
+WINFACTORY_EXTERN template class WINFACTORY_API std::map<int, HWND*>;
 namespace Util
 {
 	class WINFACTORY_API CWindFactory
@@ -38,7 +40,6 @@ namespace Util
 
 }
 typedef Util::CWindFactory MyAppFactory;
-
 extern "C"
 {
 	void WINFACTORY_API FunctionNeedToHook();
