@@ -1,5 +1,3 @@
-// DialogMainTab.cpp : implementation file
-//
 #pragma once
 #include "stdafx.h"
 #include "MyApp.h"
@@ -22,7 +20,7 @@
 IMPLEMENT_DYNAMIC(CDialogMainTab, CDialogEx)
 
 CDialogMainTab::CDialogMainTab(CWnd* pParent /*=NULL*/)
-: CDialogEx(IDD_DIALOG_TAB_MAIN, pParent), Util::SwitchGroupTabHandler<CDialogMainTab>(&m_CTabCtrl, 8)
+: CDialogEx(IDD_DIALOG_TAB_MAIN, pParent), Util::GroupTabHandler<CDialogMainTab, CDialogEx>(&m_CTabCtrl, 8)
 {
 	MyAppFactory::GetInstance()->Add(IDD_DIALOG_TAB_MAIN, this);
 

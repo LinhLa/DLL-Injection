@@ -19,6 +19,12 @@
     <Filter Include="Source Files\Tab dialog">
       <UniqueIdentifier>{88a6fe16-f0c9-4394-9b12-cb9073676521}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Common">
+      <UniqueIdentifier>{59b07c58-f2b9-42b3-9a5b-02094640a84d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Common">
+      <UniqueIdentifier>{9ae766df-9af1-474e-bc5e-49c05562c239}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -37,9 +43,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Util.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MainWnd.h">
@@ -75,20 +78,29 @@
     <ClInclude Include="RegrexCheckDlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectPool.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="TestCbxWithRegex.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="HandleComboboxItem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SwitchGroupTabHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="HookingDlg.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fwd.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="GroupTabHandler.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="HandleComboboxItem.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="HookAPI.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectPool.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Util.h">
+      <Filter>Header Files\Common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -137,11 +149,14 @@
     <ClCompile Include="TestCbxWithRegex.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="HandleComboboxItem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="HookingDlg.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HandleComboboxItem.cpp">
+      <Filter>Source Files\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="HookAPI.cpp">
+      <Filter>Source Files\Common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

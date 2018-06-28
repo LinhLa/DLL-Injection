@@ -3,7 +3,7 @@
 #include "afxcmn.h"
 // CDialogMainTab dialog
 
-class CDialogMainTab : public CDialogEx, public Util::SwitchGroupTabHandler<CDialogMainTab>
+class CDialogMainTab : public CDialogEx, public Util::GroupTabHandler<CDialogMainTab, CDialogEx>
 {
 	DECLARE_DYNAMIC(CDialogMainTab)
 

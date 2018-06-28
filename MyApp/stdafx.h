@@ -52,7 +52,6 @@
 #endif
 
 #include <DbgHelp.h>
-
 #include <regex>
 #include <string>
 #include <functional>
@@ -60,3 +59,4 @@
 #include <map>
 #include <thread>
 #include <list>
+#include <codecvt>

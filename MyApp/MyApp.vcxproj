@@ -29,8 +29,8 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
-    <CharacterSet>NotSet</CharacterSet>
-    <UseOfMfc>Static</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>Dynamic</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -43,14 +43,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
-    <CharacterSet>NotSet</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>Static</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>Static</UseOfMfc>
@@ -202,7 +202,9 @@
     <ClInclude Include="DialogTab6.h" />
     <ClInclude Include="DialogTab7.h" />
     <ClInclude Include="DialogTab8.h" />
+    <ClInclude Include="fwd.h" />
     <ClInclude Include="HandleComboboxItem.h" />
+    <ClInclude Include="HookAPI.h" />
     <ClInclude Include="HookingDlg.h" />
     <ClInclude Include="MainWnd.h" />
     <ClInclude Include="MyApp.h" />
@@ -211,7 +213,7 @@
     <ClInclude Include="RegrexCheckDlg.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="SwitchGroupTabHandler.h" />
+    <ClInclude Include="GroupTabHandler.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TestCbxWithRegex.h" />
     <ClInclude Include="Util.h" />
@@ -227,6 +229,7 @@
     <ClCompile Include="DialogTab7.cpp" />
     <ClCompile Include="DialogTab8.cpp" />
     <ClCompile Include="HandleComboboxItem.cpp" />
+    <ClCompile Include="HookAPI.cpp" />
     <ClCompile Include="HookingDlg.cpp" />
     <ClCompile Include="MainWnd.cpp" />
     <ClCompile Include="MyApp.cpp" />

@@ -36,6 +36,18 @@ BOOL CWinFactoryApp::InitInstance()
 	return TRUE;
 }
 
+
+void FunctionNeedToHook()
+{
+	AfxMessageBox(_T("void WINFACTORY_API FunctionNeedToHook() is called"), 0, 0);
+}
+
+void* GetWindFactory()
+{
+	return (void*)MyAppFactory::GetInstance();
+
+}
+
 CWindFactory::CWindFactory()
 {
 	m_WndClass.style = 0; // Class style
@@ -132,9 +144,4 @@ void CWindFactory::Run()
 {
 	std::thread t(&CWindFactory::MessageLooping, this);
 	t.detach();
-}
-
-void WINFACTORY_API FunctionNeedToHook()
-{
-	AfxMessageBox(_T("void WINFACTORY_API FunctionNeedToHook() is called"), 0, 0);
 }

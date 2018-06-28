@@ -1,5 +1,6 @@
 #pragma once
 #include "Util.h"
+#include "afxcmn.h"
 class CHookingDlg : public CDialogEx
 {
 	DECLARE_DYNAMIC(CHookingDlg)
@@ -21,14 +22,14 @@ private:
 		HOOK,
 		CALL
 	} m_hooking_status;
-	std::map<CString, THUNK_DATA_ENTRY> m_MapImportFunction;
-	void SetComboFunction();
+	std::map<CString, Util::THUNK_DATA_ENTRY> m_MapImportFunction;
+	void LoadListControlData();
 public:
 	virtual BOOL PreTranslateMessage(MSG* pMsg);
 	virtual BOOL OnInitDialog();
 	afx_msg void OnBnClickedButton1();
 	afx_msg void OnBnClickedCancle();
-	afx_msg void OnCbnSelchangeCombo1();
+	CListCtrl m_CListCtrl;
 };
 
 void FunctionHooked();
