@@ -9,6 +9,7 @@
 #include "RegrexCheckDlg.h"
 #include "TestCbxWithRegex.h"
 #include "HookingDlg.h"
+#include "TaskManager.h"
 #include "afxdialogex.h"
 
 
@@ -40,6 +41,7 @@ BEGIN_MESSAGE_MAP(CMainWnd, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON4, &CMainWnd::OnBnClickedButton4)
 	ON_WM_COPYDATA()
 	ON_BN_CLICKED(IDC_BUTTON5, &CMainWnd::OnBnClickedButton5)
+	ON_BN_CLICKED(IDC_BUTTON7, &CMainWnd::OnBnClickedButton7)
 END_MESSAGE_MAP()
 
 
@@ -92,6 +94,13 @@ BOOL CMainWnd::OnCopyData(CWnd* pWnd, COPYDATASTRUCT* pCopyDataStruct)
 
 void CMainWnd::OnBnClickedButton5()
 {
-	CHookingDlg hookingDlg;
+	CHookingDlg hookingDlg(this);
 	hookingDlg.DoModal();
+}
+
+
+void CMainWnd::OnBnClickedButton7()
+{
+	CTaskManager TaskManager(this);
+	TaskManager.DoModal();
 }

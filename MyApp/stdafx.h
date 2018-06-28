@@ -52,6 +52,8 @@
 #endif
 
 #include <DbgHelp.h>
+#include <tlhelp32.h>
+
 #include <regex>
 #include <string>
 #include <functional>

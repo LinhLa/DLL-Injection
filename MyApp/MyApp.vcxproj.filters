@@ -102,6 +102,9 @@
     <ClInclude Include="Util.h">
       <Filter>Header Files\Common</Filter>
     </ClInclude>
+    <ClInclude Include="TaskManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MyApp.cpp">
@@ -157,6 +160,9 @@
     </ClCompile>
     <ClCompile Include="HookAPI.cpp">
       <Filter>Source Files\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="TaskManager.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

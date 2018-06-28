@@ -48,6 +48,35 @@ namespace Util
 		s = std::regex_replace(target, self_regex, _T(""));
 		return s.c_str();
 	}
+
+	template<class T> BOOL FindProcess(std::vector<PROCESSENTRY32> &out)
+	{
+		HANDLE hProcessSnap;
+		PROCESSENTRY32 pe32;
+
+		// Take a snapshot of all processes in the system.
+		hProcessSnap = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+		if (INVALID_HANDLE_VALUE == hProcessSnap)
+			return(FALSE);
+
+		pe32.dwSize = sizeof(PROCESSENTRY32); // <----- IMPORTANT
+
+		// Retrieve information about the first process and exit if unsuccessful
+		if (!Process32First(hProcessSnap, &pe32))
+		{
+			CloseHandle(hProcessSnap);          // clean the snapshot object
+			return(FALSE);
+		}
+
+		do
+		{
+			out.push_back(pe32);
+		} while (Process32Next(hProcessSnap, &pe32));
+
+		CloseHandle(hProcessSnap);
+		return TRUE;
+	}
+
 }
 
 
