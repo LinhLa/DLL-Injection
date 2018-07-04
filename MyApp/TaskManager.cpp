@@ -30,6 +30,7 @@ void CTaskManager::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(CTaskManager, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON1, &CTaskManager::OnBnClickedButton1)
+	ON_BN_CLICKED(IDOK, &CTaskManager::OnBnClickedOk)
 END_MESSAGE_MAP()
 
 void CTaskManager::LoadListControlData()
@@ -63,7 +64,7 @@ BOOL CTaskManager::OnInitDialog()
 	m_CListCtrl.InsertColumn(1, PROCESS_ID, LVCFMT_LEFT, (lstCtrlRect.right - lstCtrlRect.left) / 3);
 	m_CListCtrl.InsertColumn(2, PROCESS_THREAD_NO, LVCFMT_LEFT, (lstCtrlRect.right - lstCtrlRect.left) / 3);
 
-	Util::FindProcess<CTaskManager>(m_LstProcess);
+	Util::FindProcess(m_LstProcess);
 	LoadListControlData();
 
 	return TRUE;
@@ -91,4 +92,12 @@ void CTaskManager::OnBnClickedButton1()
 			m_CListCtrl.DeleteItem(nItem);
 		}
 	}
+}
+
+
+void CTaskManager::OnBnClickedOk()
+{
+	m_LstProcess.clear();
+	Util::FindProcess(m_LstProcess);
+	LoadListControlData();
 }

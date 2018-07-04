@@ -6,6 +6,7 @@
 #define WINFACTORY_API __declspec(dllexport)
 #define WINFACTORY_EXTERN
 #else
+
 #define WINFACTORY_API __declspec(dllimport)
 #define WINFACTORY_EXTERN extern
 #endif

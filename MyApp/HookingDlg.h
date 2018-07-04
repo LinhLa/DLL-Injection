@@ -1,7 +1,7 @@
 #pragma once
-#include "Util.h"
+#include "ListControlIAT.h"
 #include "afxcmn.h"
-class CHookingDlg : public CDialogEx
+class CHookingDlg : public CDialogEx, public Util::CListControlIAT
 {
 	DECLARE_DYNAMIC(CHookingDlg)
 
@@ -22,8 +22,6 @@ private:
 		HOOK,
 		CALL
 	} m_hooking_status;
-	std::map<CString, Util::THUNK_DATA_ENTRY> m_MapImportFunction;
-	void LoadListControlData();
 public:
 	virtual BOOL PreTranslateMessage(MSG* pMsg);
 	virtual BOOL OnInitDialog();

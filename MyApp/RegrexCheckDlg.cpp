@@ -40,8 +40,8 @@ void CRegrexCheckDlg::OnBnClickedButton1()
 {
 	CString target;
 	CString regrex;
-	GetDlgItemText(IDC_EDIT1, target);
-	GetDlgItemText(IDC_EDIT2, regrex);
+	GetDlgItemText(IDC_EDIT1, regrex);
+	GetDlgItemText(IDC_EDIT2, target);
 	switch (m_regex_status)
 	{
 	case REGEX_BUTTON_STATUS::REGEX_MATCH:

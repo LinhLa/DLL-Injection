@@ -43,14 +43,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>Static</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>Static</UseOfMfc>
@@ -75,6 +75,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -92,12 +93,14 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\WinFactory\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\;..\Common\;..\WinFactory\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Dbghelp.lib</AdditionalDependencies>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <GenerateMapFile>true</GenerateMapFile>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -193,6 +196,14 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Common\DllInject.h" />
+    <ClInclude Include="..\Common\fwd.h" />
+    <ClInclude Include="..\Common\GroupTabHandler.h" />
+    <ClInclude Include="..\Common\HookAPI.h" />
+    <ClInclude Include="..\Common\ListControlIAT.h" />
+    <ClInclude Include="..\Common\ObjectPool.h" />
+    <ClInclude Include="..\Common\Util.h" />
+    <ClInclude Include="..\Common\UtilRegex.h" />
     <ClInclude Include="DialogMainTab.h" />
     <ClInclude Include="DialogTab1.h" />
     <ClInclude Include="DialogTab2.h" />
@@ -202,24 +213,21 @@
     <ClInclude Include="DialogTab6.h" />
     <ClInclude Include="DialogTab7.h" />
     <ClInclude Include="DialogTab8.h" />
-    <ClInclude Include="fwd.h" />
-    <ClInclude Include="HandleComboboxItem.h" />
-    <ClInclude Include="HookAPI.h" />
     <ClInclude Include="HookingDlg.h" />
     <ClInclude Include="MainWnd.h" />
     <ClInclude Include="MyApp.h" />
     <ClInclude Include="MyAppDlg.h" />
-    <ClInclude Include="ObjectPool.h" />
     <ClInclude Include="RegrexCheckDlg.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="GroupTabHandler.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TaskManager.h" />
     <ClInclude Include="TestCbxWithRegex.h" />
-    <ClInclude Include="Util.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Common\HandleComboboxItem.cpp" />
+    <ClCompile Include="..\Common\HookAPI.cpp" />
+    <ClCompile Include="..\Common\ListControlIAT.cpp" />
     <ClCompile Include="DialogMainTab.cpp" />
     <ClCompile Include="DialogTab1.cpp" />
     <ClCompile Include="DialogTab2.cpp" />
@@ -229,8 +237,6 @@
     <ClCompile Include="DialogTab6.cpp" />
     <ClCompile Include="DialogTab7.cpp" />
     <ClCompile Include="DialogTab8.cpp" />
-    <ClCompile Include="HandleComboboxItem.cpp" />
-    <ClCompile Include="HookAPI.cpp" />
     <ClCompile Include="HookingDlg.cpp" />
     <ClCompile Include="MainWnd.cpp" />
     <ClCompile Include="MyApp.cpp" />

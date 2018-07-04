@@ -1,5 +1,4 @@
 #pragma once
-#include "stdafx.h"
 enum CITEM_TYPE : unsigned int {
 	INDEX = 0,
 	INTEGER,
