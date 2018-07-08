@@ -36,8 +36,6 @@ END_MESSAGE_MAP()
 
 void CDialogTab1::PostNcDestroy()
 {
-	// TODO: Add your specialized code here and/or call the base class
-	delete this;
 	CDialogEx::PostNcDestroy();
 }
 

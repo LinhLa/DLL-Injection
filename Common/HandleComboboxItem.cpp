@@ -4,6 +4,13 @@
 
 namespace Util {
 
+	CItem::CItem(int *data, CITEM_TYPE type, CString format, CString regex_match, CString regex_replace) :
+	m_data(data), m_type(type), m_format(format), m_regex_match(regex_match), m_regex_replace(regex_replace)
+	{}
+
+	CItem::CItem(int *data, CITEM_TYPE type, CString format, CString regex_match, CString regex_replace, int min, int max, int step):
+	m_data(data), m_type(type), m_format(format), m_regex_match(regex_match), m_regex_replace(regex_replace), m_Min(min), m_Max(max), m_Step(step)
+	{}
 
 	void SetIndexItemCombobox(CWnd* dlg, std::pair<const int, Util::CItem > &ComboItem, std::function<void()> &notifyError)
 	{
@@ -85,11 +92,11 @@ namespace Util {
 		{
 			case INTEGER:
 				iValue = _ttoi(Util::RegexReplace<REGEX_POLICY::ECMA>(text.GetBuffer(), ComboItem.second.m_regex_replace.GetBuffer()));
-				(iValue && errno != ERANGE)?*(int*)ComboItem.second.m_data = iValue: notifyError();
+				(!iValue && errno == ERANGE) ? notifyError() : *(int*)ComboItem.second.m_data = iValue;
 				break;
 			case FLOAT_POINT:
 				dValue = _ttof(Util::RegexReplace<REGEX_POLICY::ECMA>(text.GetBuffer(), ComboItem.second.m_regex_replace.GetBuffer()));
-				(dValue && errno != ERANGE)? *(double*)ComboItem.second.m_data = dValue : notifyError();
+				(!dValue && errno == ERANGE) ? notifyError() : *(double*)ComboItem.second.m_data = dValue;
 				break;
 			default:
 				notifyError();

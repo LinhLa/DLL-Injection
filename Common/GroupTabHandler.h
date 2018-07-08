@@ -29,7 +29,21 @@ namespace Util
 
 		GroupTabHandler(CTabCtrl *pCTabCtrl = NULL, int TotalTabItem = 0) :
 			pCTabCtrl(pCTabCtrl), m_DialogTab(TotalTabItem), GroupIDActive(INVALID_GROUPID)
-		{}
+		{
+			for (auto &subTab : m_DialogTab)
+			{
+				subTab = NULL;
+			}
+		}
+
+		~GroupTabHandler()
+		{
+			for (auto &subTab : m_DialogTab)
+			{
+				if (subTab)
+					delete subTab;
+			}
+		}
 
 	public:
 		/*Insert item Tab control*/
