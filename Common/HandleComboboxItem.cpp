@@ -69,7 +69,7 @@ namespace Util {
 			for (int value = item.second.m_Min; value <= item.second.m_Max; value += item.second.m_Step)
 			{
 				text.Format(item.second.m_format, value);
-				if (Util::IsMatchRegex<REGEX_POLICY::ECMA>(text.GetBuffer(), item.second.m_regex_match.GetBuffer()))
+				if (Util::IsMatchRegex<REGEX_POLICY::ECMA>(text, item.second.m_regex_match))
 					((CComboBox*)dlg->GetDlgItem(item.first))->AddString(text);
 				else
 					notifyError();
@@ -91,11 +91,11 @@ namespace Util {
 		switch (ComboItem.second.m_type)
 		{
 			case INTEGER:
-				iValue = _ttoi(Util::RegexReplace<REGEX_POLICY::ECMA>(text.GetBuffer(), ComboItem.second.m_regex_replace.GetBuffer()));
+				iValue = _ttoi(Util::RegexReplace<REGEX_POLICY::ECMA>(text, ComboItem.second.m_regex_replace));
 				(!iValue && errno == ERANGE) ? notifyError() : *(int*)ComboItem.second.m_data = iValue;
 				break;
 			case FLOAT_POINT:
-				dValue = _ttof(Util::RegexReplace<REGEX_POLICY::ECMA>(text.GetBuffer(), ComboItem.second.m_regex_replace.GetBuffer()));
+				dValue = _ttof(Util::RegexReplace<REGEX_POLICY::ECMA>(text, ComboItem.second.m_regex_replace));
 				(!dValue && errno == ERANGE) ? notifyError() : *(double*)ComboItem.second.m_data = dValue;
 				break;
 			default:

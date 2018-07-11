@@ -77,7 +77,7 @@ void CTaskManager::OnBnClickedButton1()
 	if (pos != NULL)
 	{
 		int nItem = m_CListCtrl.GetNextSelectedItem(pos);
-		DWORD nPID = _ttoi(m_CListCtrl.GetItemText(nItem, 1).GetBuffer());
+		DWORD nPID = _ttoi(m_CListCtrl.GetItemText(nItem, 1));
 		HANDLE hProcess = OpenProcess(PROCESS_TERMINATE, FALSE, nPID);
 		if (hProcess != INVALID_HANDLE_VALUE && TerminateProcess(hProcess, 0))
 		{

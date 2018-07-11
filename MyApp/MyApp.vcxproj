@@ -45,7 +45,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
-    <UseOfMfc>Static</UseOfMfc>
+    <UseOfMfc>Dynamic</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -76,9 +76,11 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <TargetName>$(ProjectName)$(Platform)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <TargetName>$(ProjectName)$(Platform)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -120,12 +122,13 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\WinFactory\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\;..\Common\;..\WinFactory\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Dbghelp.lib</AdditionalDependencies>
+      <AdditionalDependencies>Dbghelp.lib;WinFactory.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -202,7 +205,7 @@
     <ClInclude Include="..\Common\GroupTabHandler.h" />
     <ClInclude Include="..\Common\HandleComboboxItem.h" />
     <ClInclude Include="..\Common\HookAPI.h" />
-    <ClInclude Include="..\Common\ListControlIAT.h" />
+    <ClInclude Include="..\Common\ListControl.h" />
     <ClInclude Include="..\Common\ObjectPool.h" />
     <ClInclude Include="..\Common\Util.h" />
     <ClInclude Include="..\Common\UtilRegex.h" />
@@ -229,7 +232,7 @@
   <ItemGroup>
     <ClCompile Include="..\Common\HandleComboboxItem.cpp" />
     <ClCompile Include="..\Common\HookAPI.cpp" />
-    <ClCompile Include="..\Common\ListControlIAT.cpp" />
+    <ClCompile Include="..\Common\ListControl.cpp" />
     <ClCompile Include="DialogMainTab.cpp" />
     <ClCompile Include="DialogTab1.cpp" />
     <ClCompile Include="DialogTab2.cpp" />
@@ -261,11 +264,6 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\MyApp.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\WinFactory\WinFactory.vcxproj">
-      <Project>{cc50e40a-4b99-4941-a5c4-e0b528577cdc}</Project>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

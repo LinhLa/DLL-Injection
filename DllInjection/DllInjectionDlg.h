@@ -1,10 +1,10 @@
 #pragma once
 #include "DllInject.h"
-#include "ListControlIAT.h"
+#include "ListControl.h"
 #include "afxcmn.h"
 
 // CDllInjectionDlg dialog
-class CDllInjectionDlg : public CDialogEx, public Util::DllInject, public Util::CListControlIAT
+class CDllInjectionDlg : public CDialogEx, public Util::DllInject, public Util::CListControlHMODULE
 {
 // Construction
 public:

@@ -4,10 +4,57 @@
 #include "UtilRegex.h"
 
 #define PATH_REPLACE_REGEX	_T("[A-Z]:\\\\([a-zA-Z0-9_\\. ]+\\\\)+")
-#define THREAD_ATTRIBUTE (PROCESS_CREATE_THREAD | PROCESS_QUERY_INFORMATION | PROCESS_VM_OPERATION | PROCESS_VM_WRITE | PROCESS_VM_READ)
+#define THREAD_ATTRIBUTE	(PROCESS_CREATE_THREAD | \
+							PROCESS_QUERY_INFORMATION | \
+							PROCESS_VM_OPERATION | \
+							PROCESS_VM_WRITE | \
+							PROCESS_VM_READ)
+
+#ifdef  _UNICODE
+#define _tstring  std::wstring
+#define ToGenericString(lpszString) (std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>, wchar_t>().from_bytes(lpszString))
+#else
+#define _tstring std::string
+#define ToGenericString(lpszString)
+#endif
 
 namespace Util
 {
+	BOOL SetPrivilege(HANDLE hToken,LPCTSTR lpszPrivilege,BOOL bEnablePrivilege)
+	{
+		TOKEN_PRIVILEGES tp;
+		LUID luid;
+
+		if (!LookupPrivilegeValue(
+			NULL,				// lookup privilege on local system
+			lpszPrivilege,		// privilege to lookup
+			&luid))				// receives LUID of privilege
+		{
+			return FALSE;
+		}
+
+		tp.PrivilegeCount = 1;
+		tp.Privileges[0].Luid = luid;
+		if (bEnablePrivilege)
+			tp.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
+		else
+			tp.Privileges[0].Attributes = 0;
+
+		// Enable the privilege or disable all privileges.
+		if (!AdjustTokenPrivileges(
+			hToken,
+			FALSE,
+			&tp,
+			sizeof(TOKEN_PRIVILEGES),
+			(PTOKEN_PRIVILEGES)NULL,
+			(PDWORD)NULL))
+		{
+			return FALSE;
+		}
+		return TRUE;
+	}
+
+
 	BOOL FindProcess(std::vector<PROCESSENTRY32> &out)
 	{
 		PROCESSENTRY32 pe32;
@@ -15,7 +62,7 @@ namespace Util
 		// Take a snapshot of all processes in the system.
 		HANDLE hProcessSnap = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
 		if (INVALID_HANDLE_VALUE == hProcessSnap)
-			return(FALSE);
+			return FALSE;
 
 		pe32.dwSize = sizeof(PROCESSENTRY32); // <----- IMPORTANT
 
@@ -23,7 +70,7 @@ namespace Util
 		if (!Process32First(hProcessSnap, &pe32))
 		{
 			CloseHandle(hProcessSnap);          // clean the snapshot object
-			return(FALSE);
+			return FALSE;
 		}
 
 		do
@@ -51,14 +98,14 @@ namespace Util
 
 		for (auto &item : lstProcess)
 		{
-			/*Get Process handle*/
-			HANDLE hProcess = OpenProcess(THREAD_ATTRIBUTE, TRUE, item.th32ProcessID);
-			if (hProcess == INVALID_HANDLE_VALUE)
-				continue;
+			/*Process handle*/HANDLE hProcess = NULL;
 
 			/*Check if match execute file name*/
 			if (0 == _tcsicmp(item.szExeFile, lpszExeName))
 			{
+				hProcess = OpenProcess(THREAD_ATTRIBUTE, TRUE, item.th32ProcessID);
+				if (hProcess == INVALID_HANDLE_VALUE)
+					continue;
 				out = { item.th32ProcessID , hProcess };
 				return TRUE;
 			}
@@ -69,10 +116,12 @@ namespace Util
 				dwExePathSize > 0 &&
 				0 == _tcsicmp(lpszExePath, lpszModulePath))
 			{
+				hProcess = OpenProcess(THREAD_ATTRIBUTE, TRUE, item.th32ProcessID);
+				if (hProcess == INVALID_HANDLE_VALUE)
+					continue;
 				out = { item.th32ProcessID , hProcess };
 				return TRUE;
 			}
-			CloseHandle(hProcess);
 		}
 
 		return FALSE;
@@ -86,7 +135,7 @@ namespace Util
 		HANDLE hModuleSnap = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, dwPID);
 		if (hModuleSnap == INVALID_HANDLE_VALUE)
 		{
-			return(FALSE);
+			return FALSE;
 		}
 
 		//  Set the size of the structure before using it.
@@ -96,7 +145,7 @@ namespace Util
 		if (!Module32First(hModuleSnap, &me32))
 		{
 			CloseHandle(hModuleSnap);     // Must clean up the snapshot object!
-			return(FALSE);
+			return FALSE;
 		}
 
 		//  Now walk the module list of the process and display information about each module
@@ -186,7 +235,7 @@ namespace Util
 		}
 	}
 
-	void HookFunctionW(const TCHAR* pszHookModName, const TCHAR* pszFunctionName, PROC *newFuncAddr/*Address to be write*/)
+	void HookFunctionW(const WCHAR* pszHookModName, const WCHAR* pszFunctionName, PROC *newFuncAddr/*Address to be write*/)
 	{
 		std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>, wchar_t> convert;
 		std::string stdPszHookModName = convert.to_bytes(pszHookModName);
@@ -197,17 +246,15 @@ namespace Util
 	void TransverseFirstThunk(HMODULE hInstance, IMAGE_IMPORT_DESCRIPTOR *pImportDesc, std::map<CString, THUNK_DATA_ENTRY> &OutPut)
 	{
 		/*module name = base address + RVA Name*/
-		CHAR* pszModuleName = (CHAR*)((PBYTE)hInstance + pImportDesc->Name);
-		std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>, wchar_t> convert;
-		std::wstring stdPszModuleName = convert.from_bytes(pszModuleName);
-
+		CHAR* lpszModuleName = (CHAR*)((PBYTE)hInstance + pImportDesc->Name);
+		_tstring stdPszModuleName(ToGenericString(lpszModuleName));
 		PIMAGE_THUNK_DATA pThunk =	/*get 1st entry FirstThunk*/
 			(PIMAGE_THUNK_DATA)((PBYTE)hInstance + pImportDesc->FirstThunk);
 
 		while (pThunk->u1.Function)
 		{
 			PROC *funcAddr = (PROC*)&pThunk->u1.Function;	/*get function address*/
-			OutPut[stdPszModuleName.c_str()].lstExportByName.push_back({ _T("NONAME"), ULONG(*funcAddr) });
+			OutPut[stdPszModuleName.c_str()].lstExportByName.push_back({ _T("NONAME"), *reinterpret_cast<ULONG*>(funcAddr) });
 			pThunk++;
 		}
 	}
@@ -216,12 +263,7 @@ namespace Util
 	{
 		/*module name = base address + RVA Name*/
 		CHAR* lpszModuleName = (CHAR*)((PBYTE)hInstance + pImportDesc->Name);
-#ifdef  _UNICODE
-		std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>, wchar_t> convert;
-		std::wstring stdPszModuleName = convert.from_bytes(lpszModuleName);
-#else
-		std::string stdPszModuleName(pszModuleName);
-#endif //  _UNICODE
+		_tstring stdPszModuleName(ToGenericString(lpszModuleName));
 		PIMAGE_THUNK_DATA pThunk =	/*get 1st entry FirstThunk*/
 			(PIMAGE_THUNK_DATA)((PBYTE)hInstance + pImportDesc->FirstThunk);
 
@@ -237,10 +279,10 @@ namespace Util
 
 			PROC *funcAddr = (PROC*)&pThunk->u1.Function;	/*get function address*/
 			isExportByOrdinal ?
-				OutPut[stdPszModuleName.c_str()].lstExportByOrdinal.push_back({ LOWORD(oThunk->u1.Ordinal), ULONG(*funcAddr) }) :
+				OutPut[stdPszModuleName.c_str()].lstExportByOrdinal.push_back({ LOWORD(oThunk->u1.Ordinal), *reinterpret_cast<ULONG*>(funcAddr) }) :
 				OutPut[stdPszModuleName.c_str()].lstExportByName.push_back({
-				convert.from_bytes(pImportByName->Name).c_str(),
-				ULONG(*funcAddr)
+				ToGenericString(pImportByName->Name).c_str(),
+				*reinterpret_cast<ULONG*>(funcAddr)
 			});
 			oThunk++;
 			pThunk++;
@@ -250,13 +292,13 @@ namespace Util
 
 	void TransverseImportDirectory(std::map<CString, THUNK_DATA_ENTRY> &OutPut, const TCHAR* lpszModuleName)
 	{
-		HMODULE hInstance = GetModuleHandle(lpszModuleName);	/*get handle instance*/
+		HMODULE hInstance = GetModuleHandle(lpszModuleName);	/*lpszModuleName = NULL for current process*/
 		if (!hInstance)
 			return;
 
 		ULONG ulSize = 0;
-		PIMAGE_IMPORT_DESCRIPTOR pImportDesc = /*get address 1st entry IAT*/
-			(PIMAGE_IMPORT_DESCRIPTOR)::ImageDirectoryEntryToData(hInstance, TRUE, IMAGE_DIRECTORY_ENTRY_IMPORT, &ulSize);
+		IMAGE_IMPORT_DESCRIPTOR *pImportDesc = /*get address 1st entry IAT*/
+			(IMAGE_IMPORT_DESCRIPTOR*)::ImageDirectoryEntryToData(hInstance, TRUE, IMAGE_DIRECTORY_ENTRY_IMPORT, &ulSize);
 
 		while (pImportDesc->Name) /*Check module name*/
 		{
@@ -299,8 +341,8 @@ namespace Util
 			return;
 
 		ULONG ulSize = 0;
-		PIMAGE_IMPORT_DESCRIPTOR pImportDesc = /*get address 1st entry IAT*/
-			(PIMAGE_IMPORT_DESCRIPTOR)::ImageDirectoryEntryToData(lpBaseAddr, TRUE, IMAGE_DIRECTORY_ENTRY_IMPORT, &ulSize);
+		IMAGE_IMPORT_DESCRIPTOR *pImportDesc = /*get address 1st entry IAT*/
+			(IMAGE_IMPORT_DESCRIPTOR*)::ImageDirectoryEntryToData(lpBaseAddr, TRUE, IMAGE_DIRECTORY_ENTRY_IMPORT, &ulSize);
 
 		if (!pImportDesc || ulSize == 0)
 			return;

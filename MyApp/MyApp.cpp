@@ -55,6 +55,10 @@ BOOL CMyAppApp::InitInstance()
 
 	SetRegistryKey(_T("Local AppWizard-Generated Applications"));
 
+	//Load Window Factory
+	::LoadLibrary(_T("WinFactory.dll"));
+
+	//Show Main Dialog
 	CMainWnd dlg;
 	m_pMainWnd = &dlg;
 	INT_PTR nResponse = dlg.DoModal();

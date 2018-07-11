@@ -1,5 +1,5 @@
 #pragma once
-#include "ListControlIAT.h"
+#include "ListControl.h"
 #include "afxcmn.h"
 class CHookingDlg : public CDialogEx, public Util::CListControlIAT
 {

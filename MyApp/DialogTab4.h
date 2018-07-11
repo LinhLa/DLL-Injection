@@ -25,16 +25,8 @@ protected:
 public:
 	virtual BOOL OnInitDialog();
 private:
-	struct MYDATA {
-		std::vector<int> m_pIDCArray;
-		CWnd *m_pCWnd;
-	};
 	int data[28];
-	MYDATA m_DataArray[MAX_THREAD];
-	CWinThread  *m_hThreadArray[MAX_THREAD];
-	DWORD m_ThreadIdArray[MAX_THREAD];
 	std::map<int, Util::CItem > m_MapIdcToItem;
-	static UINT  InitComboItem(LPVOID data);
 public:
 	afx_msg void OnBnClickedReset();
 };

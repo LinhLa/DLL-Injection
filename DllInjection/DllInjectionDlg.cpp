@@ -13,9 +13,16 @@
 #define new DEBUG_NEW
 #endif
 
+#if _WIN32 || _WIN64
+#if _WIN64
+#define DLLINJECT_TITLE _T("DllInjector x64")
+#else
+#define DLLINJECT_TITLE _T("DllInjector x86")
+#endif
+#endif
 
 CDllInjectionDlg::CDllInjectionDlg(CWnd* pParent /*=NULL*/)
-	: CDialogEx(IDD_DLLINJECTION_DIALOG, pParent), Util::CListControlIAT(&m_CListCtrl)
+	: CDialogEx(IDD_DLLINJECTION_DIALOG, pParent), Util::CListControlHMODULE(&m_CListCtrl, 4)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 	MyAppFactory::GetInstance()->Add(IDD_DLLINJECTION_DIALOG, this);
@@ -60,9 +67,8 @@ BOOL CDllInjectionDlg::OnInitDialog()
 
 	SetIcon(m_hIcon, TRUE);			// Set big icon
 	SetIcon(m_hIcon, FALSE);		// Set small icon
-
-	CListControlIAT::InitListControl();
-
+	CListControlHMODULE::OnInitListControl();
+	SetWindowText(DLLINJECT_TITLE);
 	return TRUE;
 }
 
@@ -119,12 +125,12 @@ void CDllInjectionDlg::OnBnClickedOk()
 	GetDlgItemText(IDC_EDIT2, lpszDllInject);
 
 	DWORD dwPID = 0;
-	if (!DllInject::Inject(lpszModuleName.GetBuffer(), lpszDllInject.GetBuffer(), dwPID))
+	if (!DllInject::Inject(lpszModuleName, lpszDllInject, dwPID))
 	{
 		DllInject::notifyError();
 		return;
 	}
 	AfxMessageBox(_T("Inject Dll Succeeded"));
-	CListControlIAT::LoadMapImportFunction(lpszModuleName.GetBuffer(), dwPID, true);
-	CListControlIAT::LoadListControlData();
+	CListControlHMODULE::Set(dwPID);
+	CListControlHMODULE::LoadListControlData();
 }

@@ -8,22 +8,42 @@
 #define MODULE_REGEX	_T("[A-Z]:\\\\([a-zA-Z0-9_\\. ]+\\\\)+([a-zA-Z0-9_\\. ]+\\.exe)")
 
 #define THREAD_ATTRIBUTE (PROCESS_CREATE_THREAD | PROCESS_QUERY_INFORMATION | PROCESS_VM_OPERATION | PROCESS_VM_WRITE | PROCESS_VM_READ)
+
+typedef DWORD PID;
+
 namespace Util
 {
 	/*Constructor get handle kernel32 and function addr LoadLibraryA */
-	DllInject::DllInject() :hKernel(GetModuleHandle(KERNEL_MODULE)), pAddrLoadLibraryA(GetProcAddress(this->hKernel, LOAD_LIBRARY_API))
+	DllInject::DllInject() :
+		hKernel(GetModuleHandle(KERNEL_MODULE)),
+		pAddrLoadLibraryA(GetProcAddress(this->hKernel, LOAD_LIBRARY_API)),
+		hToken(NULL)
 	{
+		//Get handle kernel32.dll
 		if (!hKernel)
-			notifyError = []() {AfxMessageBox(_T("kernel32.dll can not load")); };
+			AfxMessageBox(_T("kernel32.dll can not load"));
+
+		if (!pAddrLoadLibraryA)
+			AfxMessageBox(_T("LoadLibraryA fail to get address"));
+
+		//Get handle token Current process
+		if (!OpenProcessToken(GetCurrentProcess(), TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, &hToken))
+			AfxMessageBox(_T("OpenProcessToken fail"));
+
+		//Set Privilege Current process to Debug
+		if (!Util::SetPrivilege(hToken, SE_DEBUG_NAME, TRUE))
+			AfxMessageBox(_T("SetPrivilege fail to set SE_DEBUG_NAME"));
 	}
 
 	DllInject::~DllInject(){
+		if (hToken)
+			CloseHandle(hToken);
 	}
 
 	BOOL DllInject::Inject(const TCHAR* lpszModule, const TCHAR *lpszDllInject, DWORD &dwPID)
 	{
 		/*Check Module name and DLLinject path*/
-		if (!Util::IsMatchRegex<ECMA>(lpszModule, MODULE_REGEX) ||
+		if (/*!Util::IsMatchRegex<ECMA>(lpszModule, MODULE_REGEX) ||*/
 			!PathFileExists(lpszModule)
 			)
 		{
@@ -31,7 +51,7 @@ namespace Util
 			return FALSE;
 		}
 
-		if (!Util::IsMatchRegex<ECMA>(lpszDllInject, DLLINJECT_REGEX) ||
+		if (/*!Util::IsMatchRegex<ECMA>(lpszDllInject, DLLINJECT_REGEX) ||*/
 			!PathFileExists(lpszDllInject)
 			)
 		{
@@ -40,7 +60,7 @@ namespace Util
 		}
 
 		/*Get handle target process by Module name*/
-		std::pair<DWORD, HANDLE> PID2HandleProcess;
+		std::pair<PID, HANDLE> PID2HandleProcess;
 		if (!Util::FindProcess(lpszModule, PID2HandleProcess))
 		{
 			notifyError = []() {AfxMessageBox(_T("FindProcess failed")); };
@@ -53,7 +73,7 @@ namespace Util
 			return FALSE;
 		}
 
-		/*Allocate new commit page memory in tart get process*/
+		/*Allocate new commit page memory in target process*/
 		LPVOID pBaseAddr = VirtualAllocEx(PID2HandleProcess.second, NULL, _tcslen(lpszDllInject)* sizeof(TCHAR), MEM_COMMIT, PAGE_READWRITE);
 		if (!pBaseAddr)
 		{

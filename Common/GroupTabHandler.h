@@ -51,7 +51,7 @@ namespace Util
 		{
 			TCITEM tcItem;
 			tcItem.mask = TCIF_TEXT | TCIF_PARAM;
-			tcItem.pszText = TabItem.lpszTitle.GetBuffer();
+			tcItem.pszText = const_cast<TCHAR*>((const TCHAR*)TabItem.lpszTitle);
 			tcItem.lParam = (LPARAM)&(*TabItem.Dialog);
 			pCTabCtrl->InsertItem(tabID, &tcItem);
 
@@ -74,7 +74,6 @@ namespace Util
 		/*Switch Group Tab*/
 		void SwitchGroupTab(GroupID GroupID)
 		{
-
 			/*Hide current dialog tab items*/
 			GroupIDActive != INVALID_GROUPID? GetDialogFromCurrentTab()->ShowWindow(SW_HIDE): FALSE;
 

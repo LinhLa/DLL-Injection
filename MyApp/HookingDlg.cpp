@@ -58,8 +58,7 @@ BOOL CHookingDlg::OnInitDialog()
 	GetDlgItem(IDC_EDIT3)->EnableWindow(FALSE);
 	m_hooking_status = HOOK;
 
-	CListControlIAT::InitListControl();
-	CListControlIAT::LoadMapImportFunction();
+	CListControlIAT::OnInitListControl();
 	CListControlIAT::LoadListControlData();
 	return TRUE;
 }
@@ -72,7 +71,7 @@ void CHookingDlg::OnBnClickedButton1()
 	switch (m_hooking_status)
 	{
 	case HOOK_BUTTON_STATUS::HOOK:
-		Util::HookFunction(pszModuleName.GetBuffer(), pszFunctionName.GetBuffer(), (PROC*)&FunctionHooked);
+		Util::HookFunction(pszModuleName, pszFunctionName, (PROC*)&FunctionHooked);
 		break;
 	case HOOK_BUTTON_STATUS::CALL:
 		FunctionNeedToHook();

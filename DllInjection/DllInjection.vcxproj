@@ -76,9 +76,11 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <TargetName>$(ProjectName)$(Platform)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <TargetName>$(ProjectName)$(Platform)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -118,6 +120,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>.\;..\Common\;..\WinFactory\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -195,10 +198,8 @@
   <ItemGroup>
     <ClInclude Include="..\Common\DllInject.h" />
     <ClInclude Include="..\Common\fwd.h" />
-    <ClInclude Include="..\Common\GroupTabHandler.h" />
     <ClInclude Include="..\Common\HookAPI.h" />
-    <ClInclude Include="..\Common\ListControlIAT.h" />
-    <ClInclude Include="..\Common\ObjectPool.h" />
+    <ClInclude Include="..\Common\ListControl.h" />
     <ClInclude Include="..\Common\Util.h" />
     <ClInclude Include="..\Common\UtilRegex.h" />
     <ClInclude Include="DllInjection.h" />
@@ -209,9 +210,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Common\DllInject.cpp" />
-    <ClCompile Include="..\Common\HandleComboboxItem.cpp" />
     <ClCompile Include="..\Common\HookAPI.cpp" />
-    <ClCompile Include="..\Common\ListControlIAT.cpp" />
+    <ClCompile Include="..\Common\ListControl.cpp" />
     <ClCompile Include="DllInjection.cpp" />
     <ClCompile Include="DllInjectionDlg.cpp" />
     <ClCompile Include="stdafx.cpp">

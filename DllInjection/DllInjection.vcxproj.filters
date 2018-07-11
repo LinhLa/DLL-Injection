@@ -48,19 +48,13 @@
     <ClInclude Include="..\Common\fwd.h">
       <Filter>Header Files\Common</Filter>
     </ClInclude>
-    <ClInclude Include="..\Common\GroupTabHandler.h">
-      <Filter>Header Files\Common</Filter>
-    </ClInclude>
     <ClInclude Include="..\Common\HookAPI.h">
-      <Filter>Header Files\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Common\ObjectPool.h">
       <Filter>Header Files\Common</Filter>
     </ClInclude>
     <ClInclude Include="..\Common\UtilRegex.h">
       <Filter>Header Files\Common</Filter>
     </ClInclude>
-    <ClInclude Include="..\Common\ListControlIAT.h">
+    <ClInclude Include="..\Common\ListControl.h">
       <Filter>Header Files\Common</Filter>
     </ClInclude>
   </ItemGroup>
@@ -77,13 +71,10 @@
     <ClCompile Include="..\Common\DllInject.cpp">
       <Filter>Source Files\Common</Filter>
     </ClCompile>
-    <ClCompile Include="..\Common\HandleComboboxItem.cpp">
-      <Filter>Source Files\Common</Filter>
-    </ClCompile>
     <ClCompile Include="..\Common\HookAPI.cpp">
       <Filter>Source Files\Common</Filter>
     </ClCompile>
-    <ClCompile Include="..\Common\ListControlIAT.cpp">
+    <ClCompile Include="..\Common\ListControl.cpp">
       <Filter>Source Files\Common</Filter>
     </ClCompile>
   </ItemGroup>

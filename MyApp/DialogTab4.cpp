@@ -11,27 +11,13 @@
 IMPLEMENT_DYNAMIC(CDialogTab4, CDialogEx)
 
 CDialogTab4::CDialogTab4(CWnd* pParent /*=NULL*/)
-	: CDialogEx(IDD_DIALOG_TAB4, pParent), m_hThreadArray{NULL}
+	: CDialogEx(IDD_DIALOG_TAB4, pParent)
 {
-	MyAppFactory::GetInstance()->Add(IDD_DIALOG_TAB4, this);
-	m_DataArray[0].m_pIDCArray = { IDC_COMBO1,IDC_COMBO5,IDC_COMBO6,IDC_COMBO7,IDC_COMBO8,IDC_COMBO9,IDC_COMBO10 };
-	m_DataArray[1].m_pIDCArray = { IDC_COMBO11,IDC_COMBO12,IDC_COMBO13,IDC_COMBO14,IDC_COMBO15,IDC_COMBO16,IDC_COMBO17 };
-	m_DataArray[2].m_pIDCArray = { IDC_COMBO18,IDC_COMBO19,IDC_COMBO20,IDC_COMBO21,IDC_COMBO22,IDC_COMBO23,IDC_COMBO24 };
-	m_DataArray[3].m_pIDCArray = { IDC_COMBO25,IDC_COMBO26,IDC_COMBO27,IDC_COMBO28,IDC_COMBO29,IDC_COMBO30,IDC_COMBO31 };
-	m_DataArray[0].m_pCWnd = m_DataArray[1].m_pCWnd =m_DataArray[2].m_pCWnd = m_DataArray[3].m_pCWnd = this;
 }
 
 CDialogTab4::~CDialogTab4()
 {
-	// Close all thread handles
-	//for(int i = 0; i < MAX_THREAD; ++i)
-	//{
-	//	if (m_hThreadArray[i] != NULL)
-	//	{
-	//		CloseHandle(m_hThreadArray[i]);
-	//		m_hThreadArray[i] = NULL;
-	//	}
-	//}
+
 }
 
 void CDialogTab4::DoDataExchange(CDataExchange* pDX)
@@ -118,20 +104,22 @@ BOOL CDialogTab4::OnInitDialog()
 	};
 
 	/*Init value combobox*/
-	for (int i = 0; i < MAX_THREAD; i++)
+	for (auto &item : m_MapIdcToItem)
 	{
-		// Create the thread to begin execution on its own.
-		m_hThreadArray[i] = AfxBeginThread(
-			CDialogTab4::InitComboItem,		// thread function name
-			(LPVOID)&m_DataArray[i]);		// argument to thread function
+		CString lpszValue;
+		USHORT uIndex = 0;
+		CComboBox *pItem = (CComboBox*)GetDlgItem(item.first);
+		pItem->SetRedraw(FALSE);
+		pItem->InitStorage(MAX - MIN + 1, 16);
+		for (int iValue = MIN; iValue <= MAX; ++iValue)
+		{
+			lpszValue.Format((iValue > 0) ? _T("+%d") : _T("%d"), iValue);
+			pItem->InsertString(uIndex++, lpszValue);
+		}
+		pItem->SelectString(0, VALUE_RESET);
+		pItem->SetRedraw(TRUE);
+		pItem->Invalidate(TRUE);
 	}
-	//DWORD dwRet = MsgWaitForMultipleObjects(
-	//	MAX_THREAD,         // number of objects in array
-	//	m_hThreadArray,     // array of objects
-	//	TRUE,				// wait for any object
-	//	INFINITE,			// INFINITE-second wait
-	//	0);					// Not use WakeMask
-	//OutputDebugStringW(_T("Thread exit..."));
 	return TRUE;
 }
 
@@ -180,23 +168,4 @@ void CDialogTab4::OnBnClickedReset()
 	default:
 		break;
 	}
-}
-
-
-UINT  CDialogTab4::InitComboItem(LPVOID data)
-{
-	MYDATA *myData = (MYDATA*)data;
-	for (auto &IDC : myData->m_pIDCArray)
-	{
-		CString lpszValue;
-		USHORT uIndex = 0;
-		CComboBox *pItem = (CComboBox*)myData->m_pCWnd->GetDlgItem(IDC);
-		for (int iValue = MIN; iValue <= MAX; ++iValue)
-		{
-			lpszValue.Format((iValue > 0) ? _T("+%d") : _T("%d"), iValue);
-			pItem->InsertString(uIndex++, lpszValue);
-		}
-		pItem->SelectString(0, VALUE_RESET);
-	}
-	return TRUE;
 }

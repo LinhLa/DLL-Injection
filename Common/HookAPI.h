@@ -10,6 +10,12 @@
 
 namespace Util
 {
+	BOOL SetPrivilege(
+		HANDLE hToken,          // access token handle
+		LPCTSTR lpszPrivilege,  // name of privilege to enable/disable
+		BOOL bEnablePrivilege   // enable or disable privilege
+	);
+
 	BOOL FindProcess(std::vector<PROCESSENTRY32> &out);
 	BOOL FindProcess(const TCHAR *lpszModulePath, std::pair<DWORD, HANDLE> &out);
 

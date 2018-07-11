@@ -8,6 +8,7 @@ namespace Util
 	private:
 		HMODULE hKernel;
 		PROC pAddrLoadLibraryA;
+		HANDLE hToken;
 	protected:
 		std::function<void()> notifyError;
 		DllInject();
