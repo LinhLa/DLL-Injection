@@ -1,7 +1,13 @@
 #pragma once
+#include "afxwin.h"
 
-
-// CDialogTab1 dialog
+class CMyEdit :public CEdit
+{
+protected:
+	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnChar(UINT nChar, UINT nRepCnt, UINT nFlags);
+};
 
 class CDialogTab1 : public CDialogEx
 {
@@ -23,4 +29,11 @@ protected:
 	virtual void PostNcDestroy();
 public:
 	virtual BOOL OnInitDialog();
+	CMyEdit m_CEdit;
+	afx_msg void OnEnChangeEdit1();
+	virtual BOOL PreTranslateMessage(MSG* pMsg);
+private:
+	HACCEL m_hAccel;
+public:
+	afx_msg void OnBnClickedNum1();
 };

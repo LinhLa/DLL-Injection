@@ -18,18 +18,15 @@ END_MESSAGE_MAP()
 
 CWinFactoryApp::CWinFactoryApp()
 {
-	// TODO: add construction code here,
-	// Place all significant initialization in InitInstance
+
 }
 
 
 // The one and only CWinFactoryApp object
-
 CWinFactoryApp theApp;
 
 
 // CWinFactoryApp initialization
-
 BOOL CWinFactoryApp::InitInstance()
 {
 	CWinApp::InitInstance();
@@ -46,6 +43,24 @@ void* GetWindFactory()
 {
 	return (void*)MyAppFactory::GetInstance();
 
+}
+size_t CWindID::sid = 0;
+std::list<size_t> CWindID::unAssignedlist = {};
+CWindID::CWindID()
+{
+	if (!unAssignedlist.empty())
+	{
+		m_id = unAssignedlist.back();
+		unAssignedlist.pop_back();
+	}
+	else
+	{
+		m_id = sid++;
+	}
+}
+CWindID::~CWindID()
+{
+	unAssignedlist.push_back(m_id);
 }
 
 CWindFactory::CWindFactory()
@@ -119,7 +134,6 @@ const HWND& CWindFactory::GetHandle() const
 void CWindFactory::Add(int ID, CWnd* const pCWnd)
 {
 	auto itr = m_MapCWndHwnd.find(ID);
-
 	if (itr != m_MapCWndHwnd.end() && *itr->second != NULL && IsWindow(*itr->second))
 	{
 		throw std::exception("ID exist and HWND valid");
@@ -128,6 +142,11 @@ void CWindFactory::Add(int ID, CWnd* const pCWnd)
 	{
 		m_MapCWndHwnd[ID] = &pCWnd->m_hWnd;
 	}
+}
+
+void CWindFactory::Remove(int ID)
+{
+	m_MapCWndHwnd.erase(ID);
 }
 
 CWnd* const CWindFactory::Get(int ID)

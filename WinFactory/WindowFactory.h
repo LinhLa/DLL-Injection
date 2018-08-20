@@ -1,25 +1,37 @@
 #pragma once
 #include "stdafx.h"
 #include <map>
+#include <list>
 #include <thread>
-#ifdef _USRDLL
-#define WINFACTORY_API __declspec(dllexport)
-#define WINFACTORY_EXTERN
-#else
 
-#define WINFACTORY_API __declspec(dllimport)
-#define WINFACTORY_EXTERN extern
+#ifdef _USRDLL
+#define WINF_API __declspec(dllexport)
+#define WINF_EXTERN
+#else
+#define WINF_API __declspec(dllimport)
+#define WINF_EXTERN extern
 #endif
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-extern "C"
-{
-
-	WINFACTORY_EXTERN template class WINFACTORY_API std::map<int, HWND*>;
-
+	WINF_EXTERN template class WINF_API std::map<int, HWND*>;
+	WINF_EXTERN template class WINF_API std::list<size_t>;
 	namespace Util
 	{
-		class WINFACTORY_API CWindFactory
+
+		class WINF_API CWindID
+		{
+		protected:
+			static size_t sid;
+			static std::list<size_t> unAssignedlist;
+			size_t m_id;
+			CWindID();
+			~CWindID();
+		};
+
+		class WINF_API CWindFactory
 		{
 		private:
 			std::map<int, HWND*> m_MapCWndHwnd;
@@ -42,14 +54,16 @@ extern "C"
 			static CWindFactory* GetInstance();
 			const HWND& GetHandle() const;
 			void Add(int ID, CWnd* const pCWnd);
+			void Remove(int ID);
 			CWnd* const Get(int ID);
 		};
 
 	}
 	typedef Util::CWindFactory MyAppFactory;
 
-	void WINFACTORY_API FunctionNeedToHook();
-	void WINFACTORY_API *GetWindFactory();
+	void WINF_API FunctionNeedToHook();
+	void WINF_API *GetWindFactory();
+
+#ifdef __cplusplus
 }
-
-
+#endif

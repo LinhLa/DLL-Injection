@@ -11,8 +11,8 @@
 #include "HookingDlg.h"
 #include "TaskManager.h"
 #include "afxdialogex.h"
-
-
+#include "WriteShareMemory.h"
+#include "ReadShareMemory.h"
 // CMainWnd dialog
 
 IMPLEMENT_DYNAMIC(CMainWnd, CDialogEx)
@@ -42,6 +42,8 @@ BEGIN_MESSAGE_MAP(CMainWnd, CDialogEx)
 	ON_WM_COPYDATA()
 	ON_BN_CLICKED(IDC_BUTTON5, &CMainWnd::OnBnClickedButton5)
 	ON_BN_CLICKED(IDC_BUTTON7, &CMainWnd::OnBnClickedButton7)
+	ON_BN_CLICKED(IDC_BUTTON8, &CMainWnd::OnBnClickedButton8)
+	ON_BN_CLICKED(IDC_BUTTON9, &CMainWnd::OnBnClickedButton9)
 END_MESSAGE_MAP()
 
 
@@ -103,4 +105,18 @@ void CMainWnd::OnBnClickedButton7()
 {
 	CTaskManager TaskManager(this);
 	TaskManager.DoModal();
+}
+
+
+void CMainWnd::OnBnClickedButton8()
+{
+	CWriteShareMemory WriteShareMemory(this);
+	WriteShareMemory.DoModal();
+}
+
+
+void CMainWnd::OnBnClickedButton9()
+{
+	CReadShareMemory ReadShareMemory(this);
+	ReadShareMemory.DoModal();
 }

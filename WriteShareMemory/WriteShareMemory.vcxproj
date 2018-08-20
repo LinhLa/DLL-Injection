@@ -19,8 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{E8354087-F3E6-409B-9E63-9D86C44D9FD4}</ProjectGuid>
-    <RootNamespace>MyApp</RootNamespace>
+    <ProjectGuid>{5AF95F86-A9B2-456E-A686-37603C0ABA9F}</ProjectGuid>
+    <RootNamespace>WriteShareMemory</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
     <Keyword>MFCProj</Keyword>
   </PropertyGroup>
@@ -35,10 +35,10 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <UseOfMfc>Static</UseOfMfc>
+    <UseOfMfc>Dynamic</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -53,7 +53,7 @@
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <UseOfMfc>Static</UseOfMfc>
+    <UseOfMfc>Dynamic</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -75,12 +75,9 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
-    <TargetName>$(ProjectName)$(Platform)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <TargetName>$(ProjectName)$(Platform)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -95,14 +92,10 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>.\;..\Common\;..\WinFactory\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>
-      </AdditionalDependencies>
-      <GenerateMapFile>true</GenerateMapFile>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -122,13 +115,11 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>.\;..\Common\;..\WinFactory\;..\ShareMemoryMfc\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\;..\ShareMemory\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Dbghelp.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -150,7 +141,6 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>.\;..\Common\;..\WinFactory\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -200,81 +190,34 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Common\DllInject.h" />
-    <ClInclude Include="..\Common\fwd.h" />
-    <ClInclude Include="..\Common\GroupTabHandler.h" />
-    <ClInclude Include="..\Common\HandleComboboxItem.h" />
-    <ClInclude Include="..\Common\HookAPI.h" />
-    <ClInclude Include="..\Common\ListControl.h" />
-    <ClInclude Include="..\Common\ObjectPool.h" />
-    <ClInclude Include="..\Common\Util.h" />
-    <ClInclude Include="..\Common\UtilRegex.h" />
-    <ClInclude Include="DialogMainTab.h" />
-    <ClInclude Include="DialogTab1.h" />
-    <ClInclude Include="DialogTab2.h" />
-    <ClInclude Include="DialogTab3.h" />
-    <ClInclude Include="DialogTab4.h" />
-    <ClInclude Include="DialogTab5.h" />
-    <ClInclude Include="DialogTab6.h" />
-    <ClInclude Include="DialogTab7.h" />
-    <ClInclude Include="DialogTab8.h" />
-    <ClInclude Include="HookingDlg.h" />
-    <ClInclude Include="MainWnd.h" />
-    <ClInclude Include="MyApp.h" />
-    <ClInclude Include="MyAppDlg.h" />
-    <ClInclude Include="ReadShareMemory.h" />
-    <ClInclude Include="RegrexCheckDlg.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="TaskManager.h" />
-    <ClInclude Include="TestCbxWithRegex.h" />
     <ClInclude Include="WriteShareMemory.h" />
+    <ClInclude Include="WriteShareMemoryDlg.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Common\HandleComboboxItem.cpp" />
-    <ClCompile Include="..\Common\HookAPI.cpp" />
-    <ClCompile Include="..\Common\ListControl.cpp" />
-    <ClCompile Include="DialogMainTab.cpp" />
-    <ClCompile Include="DialogTab1.cpp" />
-    <ClCompile Include="DialogTab2.cpp" />
-    <ClCompile Include="DialogTab3.cpp" />
-    <ClCompile Include="DialogTab4.cpp" />
-    <ClCompile Include="DialogTab5.cpp" />
-    <ClCompile Include="DialogTab6.cpp" />
-    <ClCompile Include="DialogTab7.cpp" />
-    <ClCompile Include="DialogTab8.cpp" />
-    <ClCompile Include="HookingDlg.cpp" />
-    <ClCompile Include="MainWnd.cpp" />
-    <ClCompile Include="MyApp.cpp" />
-    <ClCompile Include="MyAppDlg.cpp" />
-    <ClCompile Include="ReadShareMemory.cpp" />
-    <ClCompile Include="RegrexCheckDlg.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="TaskManager.cpp" />
-    <ClCompile Include="TestCbxWithRegex.cpp" />
     <ClCompile Include="WriteShareMemory.cpp" />
+    <ClCompile Include="WriteShareMemoryDlg.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="MyApp.rc" />
+    <ResourceCompile Include="WriteShareMemory.rc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\MyApp.rc2" />
+    <None Include="res\WriteShareMemory.rc2" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="res\MyApp.ico" />
+    <Image Include="res\WriteShareMemory.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ShareMemoryMfc\ShareMemoryMfc.vcxproj">
-      <Project>{97d96a6a-d88c-4350-8906-9b1dfaaf597b}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\WinFactory\WinFactory.vcxproj">
-      <Project>{cc50e40a-4b99-4941-a5c4-e0b528577cdc}</Project>
+    <ProjectReference Include="..\ShareMemory\ShareMemory.vcxproj">
+      <Project>{4cfa70da-9305-4c34-830e-b4e78e47eb9a}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
@@ -282,7 +225,7 @@
   </ImportGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties RESOURCE_FILE="MyApp.rc" />
+      <UserProperties RESOURCE_FILE="WriteShareMemory.rc" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

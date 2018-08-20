@@ -114,6 +114,12 @@
     <ClInclude Include="..\Common\ListControl.h">
       <Filter>Header Files\Common</Filter>
     </ClInclude>
+    <ClInclude Include="WriteShareMemory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ReadShareMemory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MyApp.cpp">
@@ -175,6 +181,12 @@
     </ClCompile>
     <ClCompile Include="..\Common\ListControl.cpp">
       <Filter>Source Files\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="WriteShareMemory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ReadShareMemory.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
