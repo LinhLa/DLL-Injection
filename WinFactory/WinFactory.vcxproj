@@ -21,14 +21,14 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{CC50E40A-4B99-4941-A5C4-E0B528577CDC}</ProjectGuid>
     <RootNamespace>WinFactory</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <Keyword>MFCDLLProj</Keyword>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>Dynamic</UseOfMfc>
   </PropertyGroup>
@@ -43,9 +43,9 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
-    <UseOfMfc>Static</UseOfMfc>
+    <UseOfMfc>Dynamic</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
@@ -98,7 +98,8 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ModuleDefinitionFile>.\WinFactory.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>
+      </ModuleDefinitionFile>
       <GenerateMapFile>true</GenerateMapFile>
       <MapExports>true</MapExports>
     </Link>
@@ -123,7 +124,8 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ModuleDefinitionFile>.\WinFactory.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>
+      </ModuleDefinitionFile>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>

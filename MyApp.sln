@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33529.622
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MyApp", "MyApp\MyApp.vcxproj", "{E8354087-F3E6-409B-9E63-9D86C44D9FD4}"
 EndProject
@@ -16,8 +16,6 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WriteShareMemory", "WriteShareMemory\WriteShareMemory.vcxproj", "{5AF95F86-A9B2-456E-A686-37603C0ABA9F}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShareMemoryMfc", "ShareMemoryMfc\ShareMemoryMfc.vcxproj", "{97D96A6A-D88C-4350-8906-9B1DFAAF597B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyCSharpApp", "..\MyCSharpApp\MyApp\MyCSharpApp.csproj", "{73C5E7E0-0F2E-4B46-A297-E4B14E500ACE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -99,20 +97,11 @@ Global
 		{97D96A6A-D88C-4350-8906-9B1DFAAF597B}.Release|Win32.Build.0 = Release|Win32
 		{97D96A6A-D88C-4350-8906-9B1DFAAF597B}.Release|x64.ActiveCfg = Release|x64
 		{97D96A6A-D88C-4350-8906-9B1DFAAF597B}.Release|x64.Build.0 = Release|x64
-		{73C5E7E0-0F2E-4B46-A297-E4B14E500ACE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{73C5E7E0-0F2E-4B46-A297-E4B14E500ACE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{73C5E7E0-0F2E-4B46-A297-E4B14E500ACE}.Debug|Win32.ActiveCfg = Debug|Any CPU
-		{73C5E7E0-0F2E-4B46-A297-E4B14E500ACE}.Debug|Win32.Build.0 = Debug|Any CPU
-		{73C5E7E0-0F2E-4B46-A297-E4B14E500ACE}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{73C5E7E0-0F2E-4B46-A297-E4B14E500ACE}.Debug|x64.Build.0 = Debug|Any CPU
-		{73C5E7E0-0F2E-4B46-A297-E4B14E500ACE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{73C5E7E0-0F2E-4B46-A297-E4B14E500ACE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{73C5E7E0-0F2E-4B46-A297-E4B14E500ACE}.Release|Win32.ActiveCfg = Release|Any CPU
-		{73C5E7E0-0F2E-4B46-A297-E4B14E500ACE}.Release|Win32.Build.0 = Release|Any CPU
-		{73C5E7E0-0F2E-4B46-A297-E4B14E500ACE}.Release|x64.ActiveCfg = Release|Any CPU
-		{73C5E7E0-0F2E-4B46-A297-E4B14E500ACE}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3C884D8C-DCB7-4579-86AF-F5D894A34C57}
 	EndGlobalSection
 EndGlobal
